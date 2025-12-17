@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>focks</title>
+
+  <meta name="description" content="me" />
+  <meta property="og:title" content="focks" />
+  <meta property="og:description" content="fullstack" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://i.postimg.cc/30HYx3dZ/Tuff-Chungus.png" />
+  <link rel="icon" href="https://i.postimg.cc/30HYx3dZ/Tuff-Chungus.png" />
+
+  <style>
+    :root {
+      --bg: #101010;
+      --card: rgba(26,26,26,0.85);
+      --text: #f0f0f0;
+      --muted: #a0a0a0;
+      --accent: #ff6f61;
+    }
+
+    * { box-sizing: border-box; margin:0; padding:0; font-family: ui-sans-serif, system-ui, -apple-system; }
+
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      color: var(--text);
+      
+      /* background image + dark overlay */
+      background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url("https://i.ibb.co/twHqSmGj/negev.png");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      overflow-x: hidden;
+    }
+
+    .card {
+      max-width: 400px;
+      background: var(--card);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.5);
+      backdrop-filter: blur(10px);
+    }
+
+    .top { display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+    .avatar { width:80px; height:80px; border-radius:14px; object-fit:cover; border:2px solid rgba(255,255,255,.1); }
+    .name { font-size:1.4rem; font-weight:600; }
+    .tagline { font-size:.9rem; color:var(--muted); }
+
+    .section { margin-top:16px; }
+    .section h3 { font-size:.75rem; letter-spacing:.1em; color:var(--muted); text-transform:lowercase ; margin-bottom:8px; }
+    .stack { display:flex; flex-wrap:wrap; gap:6px; }
+    .pill { font-size:.8rem; padding:5px 10px; border-radius:999px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); }
+
+    .links { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:18px; }
+    .btn { width:100%; padding:8px 0; border-radius:10px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1); color:var(--text); cursor:pointer; transition:.15s; }
+    .btn:hover { background:var(--accent); transform:translateY(-2px); }
+
+    footer { margin-top:12px; text-align:center; font-size:.75rem; color:var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="top">
+      <img src="https://i.postimg.cc/30HYx3dZ/Tuff-Chungus.png" alt="avatar" class="avatar" />
+      <div>
+        <div class="name">microcalc</div>
+        <div class="tagline">#1 Glover</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>what i do</h3>
+      <div class="stack">
+        <span class="pill">fullstack</span>
+        <span class="pill">gloving</span>
+        <span class="pill">sliding</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>languages</h3>
+      <div class="stack">
+        <span class="pill">c++ / c#</span>
+        <span class="pill">python</span>
+        <span class="pill">js / html / css</span>
+        <span class="pill">luau</span>
+      </div>
+    </div>
+
+    <div class="links">
+      <a href="https://github.com/AboveOathkeeper" target="_blank"><button class="btn">github</button></a>
+      <a href="https://www.roblox.com/users/7213465010/profile" target="_blank"><button class="btn">roblox</button></a>
+      <a href="https://www.youtube.com/watch?v=WKMAqZ8RunA" target="_blank"><button class="btn">funny vid</button></a>
+    </div>
+
+    <footer>
+      Never Lost a Gloving Challenge
+    </footer>
+  </div>
+
+  <script>
+    // auto-parallax background
+    let body = document.body;
+    let posX = 0;
+    let direction = 1;
+
+    function animate() {
+      posX += 0.05 * direction;
+      if (posX > 50) direction = -1;
+      if (posX < 0) direction = 1;
+      body.style.backgroundPosition = `${posX}% center`;
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // anti-devtools flag
+    const antiDevTools = 1; // 1 = on, 0 = off
+
+    if (antiDevTools) {
+      (function() {
+        let devtoolsOpen = false;
+        const threshold = 160;
+
+        const handleDevTools = () => {
+          console.clear();
+          try { window.open('', '_self').close(); } catch(e) {}
+        };
+
+        const checkDevTools = () => {
+          const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+          const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+          if (widthThreshold || heightThreshold) {
+            if (!devtoolsOpen) {
+              devtoolsOpen = true;
+              handleDevTools();
+            }
+          } else {
+            devtoolsOpen = false;
+          }
+        };
+
+        setInterval(checkDevTools, 500);
+
+        // optional: detect opening console via debugger
+        const element = new Image();
+        Object.defineProperty(element, 'id', {
+          get: function() {
+            handleDevTools();
+          }
+        });
+        console.log('%c', element);
+      })();
+    }
+  </script>
+</body>
+</html>
